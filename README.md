@@ -6,6 +6,35 @@
 - jumpregister Jumpserver自注册
 - alpine-ext:weak 轻量sshd (业务负载的基础镜像层)
 
+## 快速开始
+
+### 1.现有集群
+
+TODO
+
+### K3S
+
+- dcp up
+
+```bash
+export K3S_VERSION=v1.17.4-rc1-k3s1
+export K3S_TOKEN=sdsdfsdfsdfsdf
+docker pull rancher/k3s:${K3S_VERSION:-latest}
+
+echo K3S_VERSION=v1.17.4-rc1-k3s1 > .env
+echo K3S_TOKEN=sdsdfsdfsdfsdf >> .env
+dcp up
+```
+
+- kube-cmd
+
+```bash
+cd /opt/apps/k3s && mkdir .kube
+cp kubeconfig.yaml .kube/config
+
+cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=host --entrypoint=bash registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
+```
+
 ## ref
 
 - kubernetes-auto-ingress https://github.com/hxquangnhat/kubernetes-auto-ingress
