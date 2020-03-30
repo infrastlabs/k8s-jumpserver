@@ -23,8 +23,8 @@ import (
 
 var (
     //read kubeconfig
-    // kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
-    kubeconfig = "/_ext/Development/Project/github.com/_k8/kubernetes-auto-ingress/kubeconfig"
+    kubeconfig = flag.String("kubeconfig", "", "absolute path to the kubeconfig file")
+    // kubeconfig = "/_ext/Development/Project/github.com/_k8/kubernetes-auto-ingress/kubeconfig"
     // kubeconfig = "file:D:\\Development\\Project\\devcn.fun\\g-dev2\\fk-kubernetes-auto-ingress" //try win fail: badPath
 
     flagNamespace = flag.String("namespace", "", "filter resources by namespace")
