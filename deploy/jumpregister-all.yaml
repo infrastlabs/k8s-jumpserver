@@ -1,0 +1,202 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: jumpregister
+  labels:
+    app: jumpregister
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: jumpregister
+  namespace: jumpregister
+  labels:
+    app: jumpregister
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRole
+metadata:
+  name: jumpregister
+  labels:
+    app: jumpregister
+rules:
+  - apiGroups:
+      - rbacmanager.reactiveops.io
+    resources:
+      - rbacdefinitions
+    verbs:
+      - get
+      - list
+      - watch
+  - apiGroups:
+      - rbac.authorization.k8s.io
+      - authorization.k8s.io
+    resources:
+      - '*'
+    verbs:
+      - '*'
+  - apiGroups:
+      - "" # core
+    resources:
+      - serviceaccounts
+    verbs:
+      - '*'
+  - apiGroups:
+      - "" # core
+    resources:
+      - namespaces
+    verbs:
+      - get
+      - list
+      - watch
+---
+apiVersion: rbac.authorization.k8s.io/v1beta1
+kind: ClusterRoleBinding
+metadata:
+  name: jumpregister
+  labels:
+    app: jumpregister
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: jumpregister
+subjects:
+  - kind: ServiceAccount
+    name: jumpregister
+    namespace: "jumpregister"
+---
+apiVersion: apiextensions.k8s.io/v1beta1
+kind: CustomResourceDefinition
+metadata:
+  labels:
+    app: jumpregister
+  name: rbacdefinitions.rbacmanager.reactiveops.io
+spec:
+  group: rbacmanager.reactiveops.io
+  names:
+    kind: RBACDefinition
+    plural: rbacdefinitions
+  scope: Cluster
+  validation:
+    openAPIV3Schema:
+      properties:
+        apiVersion:
+          type: string
+        kind:
+          type: string
+        metadata:
+          type: object
+        rbacBindings:
+          items:
+            properties:
+              clusterRoleBindings:
+                items:
+                  properties:
+                    clusterRole:
+                      type: string
+                  required:
+                  - clusterRole
+                  type: object
+                type: array
+              name:
+                type: string
+              roleBindings:
+                items:
+                  properties:
+                    clusterRole:
+                      type: string
+                    namespace:
+                      type: string
+                    namespaceSelector:
+                      type: object
+                      properties:
+                        matchLabels:
+                          type: object
+                        matchExpressions:
+                          type: array
+                    role:
+                      type: string
+                  type: object
+                type: array
+              subjects:
+                items:
+                  type: object
+                type: array
+            required:
+            - name
+            - subjects
+            type: object
+          type: array
+        status:
+          type: object
+      required:
+      - metadata
+      - rbacBindings
+      type: object
+  version: v1beta1
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jumpregister
+  namespace: jumpregister
+  labels:
+    app: jumpregister
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jumpregister
+      release: jumpregister
+  template:
+    metadata:
+      labels:
+        app: jumpregister
+        release: jumpregister
+    spec:
+      serviceAccountName: jumpregister
+      containers:
+      - name: jumpregister
+        image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpregister:v0.1.0"
+        imagePullPolicy: Always
+        # these liveness probes use the metrics endpoint
+        # readinessProbe:
+        #   httpGet:
+        #     scheme: HTTP
+        #     path: /metrics
+        #     port: 8080
+        #   initialDelaySeconds: 5
+        #   timeoutSeconds: 3
+        #   periodSeconds: 3
+        #   failureThreshold: 3
+        # livenessProbe:
+        #   httpGet:
+        #     scheme: HTTP
+        #     path: /metrics
+        #     port: 8080
+        #   initialDelaySeconds: 5
+        #   timeoutSeconds: 3
+        #   periodSeconds: 10
+        #   failureThreshold: 3
+        securityContext:
+          runAsUser: 1200
+          allowPrivilegeEscalation: false
+          privileged: false
+          readOnlyRootFilesystem: true
+          runAsNonRoot: true
+          capabilities:
+            drop:
+              - ALL
+        resources:
+          limits:
+            cpu: 100m
+            memory: 128Mi
+          requests:
+            cpu: 50m
+            memory: 64Mi
+        # ports:
+        #   # metrics port
+        #   - name: http-metrics
+        #     containerPort: 8080
+        #     protocol: TCP
