@@ -16,6 +16,10 @@
 - 全内置： jumpserver无状态
 - jumpserver外置，可与物理机混合管理，可管理多个K8S集群
 
+## 效果图
+
+TODO
+
 ## TODO
 
 - DockerfileBuild, ref: rbac-manager
