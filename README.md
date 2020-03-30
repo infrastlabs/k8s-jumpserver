@@ -10,7 +10,10 @@
 
 ### 1.现有集群
 
-TODO
+```bash
+kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
+kc -n jumpregister get po -A
+```
 
 ### K3S
 
