@@ -20,7 +20,6 @@ ARG dir=/go/devcn.fun/infrastlabs/jumpregister
 
 USER root
 WORKDIR /app
-COPY --from=builder ${dir}/conf /app/conf
 COPY --from=builder ${dir}/jumpregister /app
 
 # Configure Docker Container
