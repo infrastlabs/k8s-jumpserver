@@ -59,8 +59,8 @@ func main() {
     //if kubeconfig is specified, use out-of-cluster
     // if *kubeconfig != "" {
     //     config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
-    if kubeconfig != "" {
-        config, err = clientcmd.BuildConfigFromFlags("", kubeconfig)
+    if *kubeconfig != "" {
+        config, err = clientcmd.BuildConfigFromFlags("", *kubeconfig)
     } else {
         //get config when running inside Kubernetes
         config, err = rest.InClusterConfig()
