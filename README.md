@@ -22,6 +22,6 @@ TODO
 
 ## TODO
 
-- DockerfileBuild, ref: rbac-manager
+- ~~DockerfileBuild, ref: rbac-manager~~ Done.
 - flags: SERVER_URL, SYNC_TIME, MATCH_LABEL, KUBECONFIG,
 - conn err noExit
