@@ -22,30 +22,9 @@ metadata:
     app: jumpregister
 rules:
   - apiGroups:
-      - rbacmanager.reactiveops.io
+      - ""
     resources:
-      - rbacdefinitions
-    verbs:
-      - get
-      - list
-      - watch
-  - apiGroups:
-      - rbac.authorization.k8s.io
-      - authorization.k8s.io
-    resources:
-      - '*'
-    verbs:
-      - '*'
-  - apiGroups:
-      - "" # core
-    resources:
-      - serviceaccounts
-    verbs:
-      - '*'
-  - apiGroups:
-      - "" # core
-    resources:
-      - namespaces
+      - pods
     verbs:
       - get
       - list
@@ -65,76 +44,6 @@ subjects:
   - kind: ServiceAccount
     name: jumpregister
     namespace: "jumpregister"
----
-apiVersion: apiextensions.k8s.io/v1beta1
-kind: CustomResourceDefinition
-metadata:
-  labels:
-    app: jumpregister
-  name: rbacdefinitions.rbacmanager.reactiveops.io
-spec:
-  group: rbacmanager.reactiveops.io
-  names:
-    kind: RBACDefinition
-    plural: rbacdefinitions
-  scope: Cluster
-  validation:
-    openAPIV3Schema:
-      properties:
-        apiVersion:
-          type: string
-        kind:
-          type: string
-        metadata:
-          type: object
-        rbacBindings:
-          items:
-            properties:
-              clusterRoleBindings:
-                items:
-                  properties:
-                    clusterRole:
-                      type: string
-                  required:
-                  - clusterRole
-                  type: object
-                type: array
-              name:
-                type: string
-              roleBindings:
-                items:
-                  properties:
-                    clusterRole:
-                      type: string
-                    namespace:
-                      type: string
-                    namespaceSelector:
-                      type: object
-                      properties:
-                        matchLabels:
-                          type: object
-                        matchExpressions:
-                          type: array
-                    role:
-                      type: string
-                  type: object
-                type: array
-              subjects:
-                items:
-                  type: object
-                type: array
-            required:
-            - name
-            - subjects
-            type: object
-          type: array
-        status:
-          type: object
-      required:
-      - metadata
-      - rbacBindings
-      type: object
-  version: v1beta1
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -158,7 +67,7 @@ spec:
       serviceAccountName: jumpregister
       containers:
       - name: jumpregister
-        image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpregister:v0.1.0"
+        image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpregister:latest"
         imagePullPolicy: Always
         # these liveness probes use the metrics endpoint
         # readinessProbe:
