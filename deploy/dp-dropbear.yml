@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dropbear
+  namespace: default
+  labels:
+    app: dropbear
+  annotations:
+    fluxcd.io/ignore: true
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: dropbear
+  template:
+    metadata:
+      labels:
+        app: dropbear
+    spec:
+      #imagePullSecrets:
+      #- name: regsecret
+      containers:
+      - name: test
+        # command: ['sh', '-c']
+        # args:
+        # - tail -f /dev/null
+        env:
+          - name: SSHD_ENABLE
+            value: "true"
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 22    
+      restartPolicy: Always

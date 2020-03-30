@@ -1,0 +1,50 @@
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jumpserver-svc
+  labels:
+    app: jumpserver-svc
+spec:
+  ports:
+    - port: 22
+      name: ssh
+      targetPort: 22
+    - port: 80
+      name: http
+      targetPort: 80
+  selector:
+    app: "jumpserver"
+  type: NodePort
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jumpserver
+  namespace: default
+  labels:
+    app: jumpserver
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jumpserver
+  template:
+    metadata:
+      labels:
+        app: jumpserver
+    spec:
+      #imagePullSecrets:
+      #- name: regsecret
+      containers:
+      - name: test
+        # command: ['sh', '-c']
+        # args:
+        # - tail -f /dev/null
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 22
+        - containerPort: 80
+      restartPolicy: Always
