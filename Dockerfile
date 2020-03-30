@@ -16,7 +16,7 @@ RUN pwd && ls -h && CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -a -o jumpreg
 # Copy data into a empty image
 FROM registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext
 MAINTAINER sam <sldevsir@126.com>
-ARG dir=/go/devcn.fun/infrastlabs/jumpregister
+ARG dir=/go/src/devcn.fun/infrastlabs/jumpregister
 
 USER root
 WORKDIR /app
