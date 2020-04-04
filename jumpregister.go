@@ -164,7 +164,9 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 		lb := pod.Labels
 		/* if _, found1 := svcIngPair[svc.Name]; !found1 {
 		} */
+		fmt.Println("============== labelKey:", *jumpserverLabel)
 		if val, found2 := lb[*jumpserverLabel]; found2 {
+			fmt.Println("==============mathed label001")
 			if val == "enabled" {
 				/* newIng, err := createIngressForService(clientset, *svc)
 				if err != nil {
@@ -175,7 +177,7 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 					log.Info("Updated map: ", reflect.ValueOf(svcIngPair).MapKeys())
 				} */
 
-				fmt.Println("==============mathed label")
+				fmt.Println("==============mathed label222")
 			}
 		}
 
