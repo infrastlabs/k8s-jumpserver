@@ -158,8 +158,24 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 		} */
 
 		//label
+		lb := pod.Labels
+		/* if _, found1 := svcIngPair[svc.Name]; !found1 {
+		} */
+		if val, found2 := lb["regist-jumpserver/enabled"]; found2 {
+			if val == "enabled" {
+				/* newIng, err := createIngressForService(clientset, *svc)
+				if err != nil {
+					log.Errorln(err.Error())
+				} else {
+					log.Info("Created new ingress for service: ", svc.Name)
+					svcIngPair[svc.Name] = *newIng
+					log.Info("Updated map: ", reflect.ValueOf(svcIngPair).MapKeys())
+				} */
 
-		
+				fmt.Println("==============mathed label")
+			}
+		}
+
 		var statuses []string
 		statuses = append(statuses, string(pod.Status.Phase))
 		for _, c := range pod.Status.Conditions {
