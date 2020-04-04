@@ -74,8 +74,8 @@ spec:
         args:
         - -jumpurl=http://172.18.0.4
         # - -jumptime=3
-        # - -jumplink=regist-jumpserver/enabled
-        
+        # - -jumplabel=regist-jumpserver/enabled
+
         # these liveness probes use the metrics endpoint
         # readinessProbe:
         #   httpGet:
