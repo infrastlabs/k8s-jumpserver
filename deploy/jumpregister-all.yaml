@@ -69,6 +69,13 @@ spec:
       - name: jumpregister
         image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpregister:latest"
         imagePullPolicy: Always
+        # command:
+        # - cp
+        args:
+        - -jumpurl=http://172.18.0.4
+        # - -jumptime=3
+        # - -jumplink=regist-jumpserver/enabled
+        
         # these liveness probes use the metrics endpoint
         # readinessProbe:
         #   httpGet:
