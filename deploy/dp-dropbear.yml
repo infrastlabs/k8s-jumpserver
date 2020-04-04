@@ -16,6 +16,7 @@ spec:
     metadata:
       labels:
         app: dropbear
+        regist-jumpserver/enabled: enabled
     spec:
       #imagePullSecrets:
       #- name: regsecret
