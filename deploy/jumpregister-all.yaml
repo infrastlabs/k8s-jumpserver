@@ -1,16 +1,16 @@
----
-apiVersion: v1
-kind: Namespace
-metadata:
-  name: jumpregister
-  labels:
-    app: jumpregister
+# ---
+# apiVersion: v1
+# kind: Namespace
+# metadata:
+#   name: jumpregister
+#   labels:
+#     app: jumpregister
 ---
 apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: jumpregister
-  namespace: jumpregister
+  namespace: kube-system
   labels:
     app: jumpregister
 ---
@@ -43,13 +43,13 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: jumpregister
-    namespace: "jumpregister"
+    namespace: kube-system
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jumpregister
-  namespace: jumpregister
+  namespace: kube-system
   labels:
     app: jumpregister
 spec:
