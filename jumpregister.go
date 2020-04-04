@@ -162,41 +162,29 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 
 		//label
 		lb := pod.Labels
-		/* if _, found1 := svcIngPair[svc.Name]; !found1 {
-		} */
-		fmt.Println("============== labelKey:", *jumpserverLabel)
 		if val, found2 := lb[*jumpserverLabel]; found2 {
-			fmt.Println("==============mathed label001")
 			if val == "enabled" {
-				/* newIng, err := createIngressForService(clientset, *svc)
-				if err != nil {
-					log.Errorln(err.Error())
-				} else {
-					log.Info("Created new ingress for service: ", svc.Name)
-					svcIngPair[svc.Name] = *newIng
-					log.Info("Updated map: ", reflect.ValueOf(svcIngPair).MapKeys())
-				} */
 
-				fmt.Println("==============mathed label222")
+				// fmt.Println("==============mathed label222")
+				var statuses []string
+				statuses = append(statuses, string(pod.Status.Phase))
+				for _, c := range pod.Status.Conditions {
+					if c.Status != "True" {
+						continue
+					}
+					statuses = append(statuses, string(c.Type))
+				}
+				rows = append(rows, Row{
+					("[pod]"),//colorPod
+					(pod.ObjectMeta.Namespace),
+					pod.ObjectMeta.Name, //(fmt.Sprintf("%v", truncate(pod.ObjectMeta.Name))),
+					statuses[0],// (strings.Join(statuses, " ")),
+					(pod.Status.PodIP), //pod.Status.HostIP, pod.ObjectMeta.Labels),
+					(shortHumanDuration(time.Since(pod.CreationTimestamp.Time))),
+				})				
 			}
 		}
 
-		var statuses []string
-		statuses = append(statuses, string(pod.Status.Phase))
-		for _, c := range pod.Status.Conditions {
-			if c.Status != "True" {
-				continue
-			}
-			statuses = append(statuses, string(c.Type))
-		}
-		rows = append(rows, Row{
-			("[pod]"),//colorPod
-			(pod.ObjectMeta.Namespace),
-			pod.ObjectMeta.Name, //(fmt.Sprintf("%v", truncate(pod.ObjectMeta.Name))),
-			statuses[0],// (strings.Join(statuses, " ")),
-			(pod.Status.PodIP), //pod.Status.HostIP, pod.ObjectMeta.Labels),
-			(shortHumanDuration(time.Since(pod.CreationTimestamp.Time))),
-		})
 	}
 	ch <- rows
 }
