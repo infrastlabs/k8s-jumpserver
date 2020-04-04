@@ -11,7 +11,8 @@ import (
 
     "io/ioutil"
     "net/http"
-    "bytes"
+	"bytes"
+	// "os"
     
     "k8s.io/client-go/rest"
     "k8s.io/client-go/kubernetes"
@@ -27,13 +28,13 @@ var (
     // kubeconfig = "/_ext/Development/Project/github.com/_k8/kubernetes-auto-ingress/kubeconfig"
     // kubeconfig = "file:D:\\Development\\Project\\devcn.fun\\g-dev2\\fk-kubernetes-auto-ingress" //try win fail: badPath
 
-	flagNamespace = flag.String("namespace", "", "filter resources by namespace")
+	//flagNamespace = flag.String("namespace", "", "filter resources by namespace")
 	
-	//
-	jumpserverURL      = flag.String("jumpurl", "http://localhost:81", "filter resources by namespace") 
-	jumpserverPushTime = flag.Int("jumpurl", 3, "filter resources by namespace") 
+	//attach params: SERVER_URL, SYNC_TIME, MATCH_LABEL, KUBECONFIG,
+	jumpserverURL      = flag.String("jumpurl", "http://jumpserver", "jumpserver url, default http://jumpserver") 
+	jumpserverPushTime = flag.Int("jumptime", 3, "jump sync-push time, default 3")
+	jumpserverLabel    = flag.String("jumplabel", "regist-jumpserver/enabled", "matched label to push jumpserver, default regist-jumpserver/enabled")
 	
-
 )
 
 type (
@@ -57,7 +58,9 @@ type Pod struct {
 }
 
 func main() {
-    flag.Parse()
+	flag.Parse()
+	// fmt.Println(*jumpserverLabel)
+	// os.Exit(0)
 
     var err error
     var config *rest.Config
@@ -161,7 +164,7 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 		lb := pod.Labels
 		/* if _, found1 := svcIngPair[svc.Name]; !found1 {
 		} */
-		if val, found2 := lb["regist-jumpserver/enabled"]; found2 {
+		if val, found2 := lb[*jumpserverLabel]; found2 {
 			if val == "enabled" {
 				/* newIng, err := createIngressForService(clientset, *svc)
 				if err != nil {
