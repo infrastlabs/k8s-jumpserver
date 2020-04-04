@@ -27,7 +27,13 @@ var (
     // kubeconfig = "/_ext/Development/Project/github.com/_k8/kubernetes-auto-ingress/kubeconfig"
     // kubeconfig = "file:D:\\Development\\Project\\devcn.fun\\g-dev2\\fk-kubernetes-auto-ingress" //try win fail: badPath
 
-    flagNamespace = flag.String("namespace", "", "filter resources by namespace")
+	flagNamespace = flag.String("namespace", "", "filter resources by namespace")
+	
+	//
+	jumpserverURL      = flag.String("jumpurl", "http://localhost:81", "filter resources by namespace") 
+	jumpserverPushTime = flag.Int("jumpurl", 3, "filter resources by namespace") 
+	
+
 )
 
 type (
@@ -97,8 +103,8 @@ func main() {
         go func() { defer wg.Done(); getPods(ch, clientset) }()
         wg.Wait()
         close(ch)
-
-        time.Sleep(3*time.Second) //(500 * time.Millisecond)
+		
+        time.Sleep(time.Duration(*jumpserverPushTime) * time.Second) //(500 * time.Millisecond)
 	}
 }
 
@@ -122,7 +128,7 @@ func hostpush(rows Rows) {
 		// req = bytes.NewBuffer([]byte(tmp))
 
 		body_type := "application/json;charset=utf-8"
-		resp, _ := http.Post("http://localhost:81/hostpush/batch/", body_type, req)
+		resp, _ := http.Post(*jumpserverURL+"/hostpush/batch/", body_type, req)
 		body, _ := ioutil.ReadAll(resp.Body)
 		// fmt.Println("bodyReturns: ", string(body))
         log.Info("bodyReturns: ", string(body))
@@ -150,6 +156,10 @@ func getPods(ch chan Rows, clientset *kubernetes.Clientset) {
 		if *flagNamespace != "" && pod.ObjectMeta.Namespace != *flagNamespace {
 			continue
 		} */
+
+		//label
+
+		
 		var statuses []string
 		statuses = append(statuses, string(pod.Status.Phase))
 		for _, c := range pod.Status.Conditions {
