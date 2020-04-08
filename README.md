@@ -20,12 +20,12 @@ kc -n jumpregister get po -A
 - dcp up
 
 ```bash
-export K3S_VERSION=v1.17.4-rc1-k3s1
+export K3S_VERSION=v1.17.4-k3s1-amd64
 export K3S_TOKEN=sdsdfsdfsdfsdf
 docker pull rancher/k3s:${K3S_VERSION:-latest}
 
-echo K3S_VERSION=v1.17.4-rc1-k3s1 > .env
-echo K3S_TOKEN=sdsdfsdfsdfsdf >> .env
+echo K3S_VERSION=$K3S_VERSION > .env
+echo K3S_TOKEN=$K3S_TOKEN >> .env
 dcp up
 ```
 
