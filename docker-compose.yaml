@@ -1,0 +1,14 @@
+version: '3'
+networks:
+  default:
+    external:
+      name: k3s_default
+services:
+  jumpserver:
+    image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
+    container_name: jumpserver
+    restart: always
+    privileged: true
+    ports:
+      - "8888:80"
+      - "2222:22"
