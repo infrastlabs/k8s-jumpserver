@@ -27,6 +27,7 @@ docker pull rancher/k3s:${K3S_VERSION:-latest}
 echo K3S_VERSION=$K3S_VERSION > .env
 echo K3S_TOKEN=$K3S_TOKEN >> .env
 dcp up -d
+#dcp up -d --scale agent=2
 ```
 
 - kube-cmd
