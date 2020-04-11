@@ -32,8 +32,8 @@ dcp up
 - kube-cmd
 
 ```bash
-cd /opt/apps/k3s && mkdir .kube
-cp kubeconfig.yaml .kube/config
+cd /opt/apps/k3s && mkdir -p .kube
+cat kubeconfig.yaml > .kube/config
 
 cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=host --entrypoint=bash registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
 ```
