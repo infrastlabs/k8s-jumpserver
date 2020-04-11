@@ -5,6 +5,7 @@ networks:
       name: k3s_k3snet
 services:
   jumpserver:
+    # build: .
     image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
     container_name: jumpserver
     restart: always
