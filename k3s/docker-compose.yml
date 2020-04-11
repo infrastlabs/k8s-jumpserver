@@ -26,7 +26,7 @@ services:
     ports:
     - 6443:6443
     networks:
-      k3snet    
+    - k3snet  
 
   agent:
     image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/k3s:${K3S_VERSION:-latest}"
@@ -38,7 +38,7 @@ services:
     - K3S_URL=https://server:6443
     - K3S_TOKEN=${K3S_TOKEN:?err}
     networks:
-      k3snet    
+    - k3snet    
       
 # volumes:
 #   k3s-server: {}
