@@ -13,5 +13,5 @@ services:
       - "8888:80"
       - "2222:22"
     networks:
-      extnetwork2:
-        k3snet: 3.4.5.100      
+      k3snet:
+        ipv4_address: 3.4.5.100
