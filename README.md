@@ -26,12 +26,15 @@ docker pull rancher/k3s:${K3S_VERSION:-latest}
 
 echo K3S_VERSION=$K3S_VERSION > .env
 echo K3S_TOKEN=$K3S_TOKEN >> .env
-dcp up
+dcp up -d
 ```
 
 - kube-cmd
 
 ```bash
+test -L /opt/apps/k3s && rm -f /opt/apps/k3s
+ln -s $(pwd)/k3s /opt/apps/k3s 
+
 cd /opt/apps/k3s && mkdir -p .kube
 cat kubeconfig.yaml > .kube/config
 
