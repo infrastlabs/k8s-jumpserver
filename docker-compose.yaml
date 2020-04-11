@@ -13,5 +13,5 @@ services:
       - "8888:80"
       - "2222:22"
     networks:
-      k3snet:
+      k3s_k3snet:
         ipv4_address: 3.4.5.100
