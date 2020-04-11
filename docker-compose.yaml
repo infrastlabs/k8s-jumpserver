@@ -1,8 +1,8 @@
 version: '3'
-networks:
-  default:
-    external:
-      name: k3s_default
+# networks:
+#   default:
+#     external:
+#       name: k3snet
 services:
   jumpserver:
     image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
@@ -12,3 +12,6 @@ services:
     ports:
       - "8888:80"
       - "2222:22"
+    networks:
+      extnetwork2:
+        k3snet: 3.4.5.100      
