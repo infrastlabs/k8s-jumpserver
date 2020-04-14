@@ -7,3 +7,10 @@
 - 
 - k8s内置方案； dcp外置方案_固定ip172.26.0.100；
 - 设计图示、操作手册pic
+
+## route-add
+
+```bash
+route add -net 10.42.0.0/16 gw 3.4.5.3 eth0
+[root@814eca8b3b78 jumpserver]# ping 10.42.1.11 
+```
