@@ -14,3 +14,7 @@
 route add -net 10.42.0.0/16 gw 3.4.5.3 eth0
 [root@814eca8b3b78 jumpserver]# ping 10.42.1.11 
 ```
+
+## infos
+
+- 约定大于配置: alpine-ext:weak;  jumpserver:sysuser, defaultuser<jumpaddmin@web/ssh>
