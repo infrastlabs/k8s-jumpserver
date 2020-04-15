@@ -8,7 +8,7 @@
 - k8s内置方案； dcp外置方案_固定ip172.26.0.100；
 - 设计图示、操作手册pic
 - 
-- 改了image后dcp up, recreate: 重置dbSchema， noInitdata; cause err: loginErr, hostPushErr.
+- 改了image后dcp up, recreate: 重置dbSchema， noInitdata; addCron加两遍； cause err: loginErr, hostPushErr.
 
 ## route-add
 
