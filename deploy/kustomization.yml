@@ -2,8 +2,12 @@ apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 # namespace: kube-system
 resources:
-  # - src/rbac.yml
+  - dp-dropbear.yml
+  - dp-jumpserver.yml
+  - dp-kube-cmd.yml
+  - jumpregister-all.yml
+  
 bases:
-  - ./src
+  # - ./src
 patchesStrategicMerge:
   # - patch.yml
