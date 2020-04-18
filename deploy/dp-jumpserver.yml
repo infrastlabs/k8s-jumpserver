@@ -42,7 +42,7 @@ spec:
         # command: ['sh', '-c']
         # args:
         # - tail -f /dev/null
-        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
         imagePullPolicy: Always
         ports:
         - containerPort: 22
