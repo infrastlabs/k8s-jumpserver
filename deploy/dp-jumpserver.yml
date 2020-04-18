@@ -22,7 +22,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: jumpserver
-  namespace: default
+  namespace: kube-system
   labels:
     app: jumpserver
 spec:
