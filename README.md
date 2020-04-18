@@ -4,8 +4,10 @@ K8S容器版跳板机，POD自注册，还原传统体验 方便开发调试及�
 
 ## 一、部署拓扑
 
-- 全内置： jumpserver无状态
-- jumpserver外置，可与物理机混合管理，可管理多个K8S集群
+- 1.全内置： jumpserver无状态
+- 2.Jumpserver外置，可与物理机混合管理，可管理多个K8S集群
+
+![](docs/k8-jump-design.jpg)
 
 ## 二、Modules
 
