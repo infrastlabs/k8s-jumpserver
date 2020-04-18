@@ -2,13 +2,18 @@ version: '3'
 networks:
   default:
     external:
-      name: k3s_default
+      name: k3s_k3snet
 services:
   jumpserver:
+    # build: .
     image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
+    command: bash -c "route add -net 10.42.0.0/16 gw 3.4.5.3 eth0 && exec /run.sh"
     container_name: jumpserver
     restart: always
     privileged: true
     ports:
       - "8888:80"
       - "2222:22"
+    networks:
+      default:
+        ipv4_address: 3.4.5.100

@@ -2,50 +2,44 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: jumpserver-svc
+  name: kubecmd-svc
   namespace: kube-system
   labels:
-    app: jumpserver-svc
+    app: kubecmd-svc
 spec:
   ports:
     - port: 22
       name: ssh
       targetPort: 22
-    - port: 80
-      name: http
-      targetPort: 80
   selector:
-    app: "jumpserver"
+    app: "kubecmd"
   type: NodePort
 
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: jumpserver
+  name: kubecmd
   namespace: kube-system
   labels:
-    app: jumpserver
+    app: kubecmd
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: jumpserver
+      app: kubecmd
   template:
     metadata:
       labels:
-        app: jumpserver
+        app: kubecmd
     spec:
-      #imagePullSecrets:
-      #- name: regsecret
       containers:
       - name: test
         # command: ['sh', '-c']
         # args:
         # - tail -f /dev/null
-        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/jumpserver:weak
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
         imagePullPolicy: Always
         ports:
         - containerPort: 22
-        - containerPort: 80
       restartPolicy: Always

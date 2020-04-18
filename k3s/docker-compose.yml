@@ -2,6 +2,11 @@
 #   K3S_TOKEN=${RANDOM}${RANDOM}${RANDOM} docker-compose up
 
 version: '3'
+networks:
+  k3snet:
+    ipam:
+      config:
+      - subnet: 3.4.5.0/24
 services:
   server:
     image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/k3s:${K3S_VERSION:-latest}"
@@ -15,11 +20,13 @@ services:
     - K3S_KUBECONFIG_OUTPUT=/output/kubeconfig.yaml
     - K3S_KUBECONFIG_MODE=666
     volumes:
-    - k3s-server:/var/lib/rancher/k3s
+    - ./k3s-server:/var/lib/rancher/k3s
     # This is just so that we get the kubeconfig file out
     - .:/output
     ports:
     - 6443:6443
+    networks:
+    - k3snet  
 
   agent:
     image: "registry.cn-shenzhen.aliyuncs.com/infrastlabs/k3s:${K3S_VERSION:-latest}"
@@ -30,6 +37,8 @@ services:
     environment:
     - K3S_URL=https://server:6443
     - K3S_TOKEN=${K3S_TOKEN:?err}
-
-volumes:
-  k3s-server: {}
+    networks:
+    - k3snet    
+      
+# volumes:
+#   k3s-server: {}
