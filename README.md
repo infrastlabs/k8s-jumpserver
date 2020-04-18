@@ -2,38 +2,38 @@
 
 K8S容器版跳板机，POD自注册，还原传统体验 方便开发调试及线上问题排查
 
-## 部署拓扑
+## 一、部署拓扑
 
 - 全内置： jumpserver无状态
 - jumpserver外置，可与物理机混合管理，可管理多个K8S集群
 
-## Modules
+## 二、Modules
 
 - 1.jumpregister Jumpserver自注册
 - 2.jumpserver 0.3.x版Jumpserver跳板机
 - 3.alpine-ext:weak 轻量sshd (业务负载的基础镜像层)
 
-## 快速开始
+## 三、快速开始
 
-### 现有集群
+**1.现有集群**
 
 ```bash
 kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
 kc -n kube-systen get po -A
 ```
 
-### [初始k3s轻集群](k3s/README.md) 再执行上一步
+**[2.初始k3s轻集群](k3s/README.md) 再执行上一步**
 
-## ref
+**ref**
 
 - kubernetes-auto-ingress https://github.com/hxquangnhat/kubernetes-auto-ingress
 - kubetop https://github.com/siadat/kubetop
 
-## 效果图
+## 四、效果图
 
 TODO
 
-## TODO
+## 五、TODO
 
 - ~~DockerfileBuild, ref: rbac-manager~~ Done.
 - ~~flags: SERVER_URL, SYNC_TIME, MATCH_LABEL, KUBECONFIG,~~ Done.
