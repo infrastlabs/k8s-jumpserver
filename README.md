@@ -22,7 +22,7 @@ kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
 kc -n kube-systen get po -A
 ```
 
-(注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`)
+(注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`, `dcp`为`docker-compose`简写)
 
 **[2.初始k3s轻集群](k3s/README.md) 再执行上一步**
 
