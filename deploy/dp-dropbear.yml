@@ -22,14 +22,14 @@ spec:
       #- name: regsecret
       containers:
       - name: test
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak
+        imagePullPolicy: Always      
         # command: ['sh', '-c']
         # args:
         # - tail -f /dev/null
         env:
           - name: SSHD_ENABLE
             value: "true"
-        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak
-        imagePullPolicy: Always
         ports:
         - containerPort: 22    
       restartPolicy: Always

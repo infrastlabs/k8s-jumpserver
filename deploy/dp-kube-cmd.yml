@@ -32,14 +32,18 @@ spec:
     metadata:
       labels:
         app: kubecmd
+        regist-jumpserver/enabled: enabled
     spec:
       containers:
-      - name: test
+      - name: kubecmd
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
+        imagePullPolicy: Always      
         # command: ['sh', '-c']
         # args:
         # - tail -f /dev/null
-        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
-        imagePullPolicy: Always
+        env:
+          - name: SSHD_ENABLE
+            value: "true"        
         ports:
         - containerPort: 22
       restartPolicy: Always
