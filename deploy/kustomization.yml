@@ -4,6 +4,6 @@ kind: Kustomization
 resources:
   # - src/rbac.yml
 bases:
-  - ./
+  - ./src
 patchesStrategicMerge:
   # - patch.yml
