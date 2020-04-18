@@ -33,7 +33,13 @@ kc -n kube-systen get po -A
 
 ## 四、效果图
 
-TODO
+- ssh控制台
+
+![](docs/c1-sshLoginMain.jpg)
+
+- 容器列表
+
+![](docs/b32-资产.jpg)
 
 ## 五、TODO
 
