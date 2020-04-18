@@ -22,7 +22,9 @@ kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
 kc -n kube-systen get po -A
 ```
 
-**[2.初始k3s轻集群](k3s/README.md) 再执行上一步**
+(注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`, `dcp`为`docker-compose`简写)
+
+**2.[初始k3s轻集群](k3s/README.md) 再执行上一步**
 
 **ref**
 
@@ -31,7 +33,13 @@ kc -n kube-systen get po -A
 
 ## 四、效果图
 
-TODO
+- ssh控制台
+
+![](docs/c1-sshLoginMain.jpg)
+
+- 容器列表
+
+![](docs/b32-资产.jpg)
 
 ## 五、TODO
 
@@ -61,7 +69,7 @@ TODO
 - 切换skin处 改静态图标
 - 修改文案： K8S-Jumpserver | 容器跳板机系统； 2016-2020, devcn.fun容器版
 
-## 版本号
+### 版本号
 
 - v0.3.x part(20140704-20160726)
 - v0.4.0 part(20160809-20170303)
@@ -71,11 +79,11 @@ TODO
 - v1.4.10 20190430
 - v1.5.6  20200203
 
-## v0.3.x 分支图
+### v0.3.x 分支图
 
 ![](docs/flow_v0.3.x.jpg)
 
-## UI对比
+### UI对比
 
 - v030
 
