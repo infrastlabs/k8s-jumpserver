@@ -15,7 +15,7 @@ K8S容器版跳板机，POD自注册，还原传统体验 方便开发调试及�
 
 ## 三、快速开始
 
-**1.现有集群**
+**1.现有集群** (注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`)
 
 ```bash
 kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
