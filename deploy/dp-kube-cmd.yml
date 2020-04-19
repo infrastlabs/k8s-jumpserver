@@ -6,21 +6,38 @@ metadata:
   namespace: kube-system
   labels:
     app: kubecmd
+# ---
+# apiVersion: rbac.authorization.k8s.io/v1beta1
+# kind: ClusterRole
+# metadata:
+#   name: kubecmd
+#   labels:
+#     app: kubecmd
+# rules:
+#   - apiGroups:
+#       - "*"
+#     resources:
+#       - "*"
+#     verbs:
+#       - "*"
 ---
+# admin #cluster-admin
 apiVersion: rbac.authorization.k8s.io/v1beta1
-kind: ClusterRole
+kind: ClusterRoleBinding
 metadata:
   name: kubecmd
   labels:
     app: kubecmd
-rules:
-  - apiGroups:
-      - "*"
-    resources:
-      - "*"
-    verbs:
-      - "*"
----
+roleRef:
+  apiGroup: rbac.authorization.k8s.io
+  kind: ClusterRole
+  name: cluster-admin
+  # name: kubecmd
+subjects:
+  - kind: ServiceAccount
+    name: kubecmd
+    namespace: kube-system
+
 ---
 apiVersion: v1
 kind: Service
