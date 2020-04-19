@@ -75,7 +75,7 @@ spec:
         volumeMounts:
         - name: "docker-sock"           
           mountPath: "/var/run/docker.sock"
-          subPath: docker.sock
+          # subPath: docker.sock
       restartPolicy: Always
       volumes:
       - name: docker-sock
