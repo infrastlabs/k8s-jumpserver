@@ -22,7 +22,7 @@ services:
     tmpfs:
     - /run
     - /var/run
-    hostname: k3-server
+    # hostname: k3-server
     # network_mode: "host"
     privileged: true
     environment:
