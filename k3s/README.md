@@ -26,7 +26,7 @@ test -L /opt/apps/k3s && rm -f /opt/apps/k3s
 ln -s $(pwd)/k3s /opt/apps/k3s 
 
 cd /opt/apps/k3s && mkdir -p .kube
-cat kubeconfig.yaml > .kube/config
+set +C && cat kubeconfig.yaml > .kube/config
 
 cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=host --entrypoint=bash registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
 ```
