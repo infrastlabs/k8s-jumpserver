@@ -60,14 +60,24 @@ spec:
       serviceAccountName: kubecmd
       containers:
       - name: kubecmd
-        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
+        image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd:latest
         imagePullPolicy: Always      
         # command: ['sh', '-c']
         # args:
         # - tail -f /dev/null
+        securityContext:
+          privileged: true        
         env:
           - name: SSHD_ENABLE
             value: "true"        
         ports:
         - containerPort: 22
+        volumeMounts:
+        - name: "docker-sock"           
+          mountPath: "/var/run/docker.sock"
+          subPath: docker.sock
       restartPolicy: Always
+      volumes:
+      - name: docker-sock
+        hostPath:
+          path: /var/run/docker.sock
