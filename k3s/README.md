@@ -37,5 +37,6 @@ cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=ho
 
 - 改用aliyun镜像: `registry.cn-shenzhen.aliyuncs.com/infrastlabs/k3s:${K3S_VERSION:-latest}`
 - volume挂载盘: 使用相对路径`./k3s-server`
+- 设定Master节点主机名: `hostname: k3-server`
 - 设定k3snet网段: `3.4.5.0/24`, for jumpserver's static ip: `3.4.5.100`
 - 设定NodePort端口段: `–service-node-port-range=30000-30050` #1-65535 #默认范围（30000-32767)
