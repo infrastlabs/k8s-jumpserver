@@ -31,6 +31,7 @@ services:
     - K3S_KUBECONFIG_MODE=666
     volumes:
     - ./k3s-server:/var/lib/rancher/k3s
+    - /var/run/docker.sock:/var/run/docker.sock    
     # This is just so that we get the kubeconfig file out
     - .:/output
     ports:
@@ -49,6 +50,8 @@ services:
     environment:
     - K3S_URL=https://server:6443
     - K3S_TOKEN=${K3S_TOKEN:?err}
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock     
     networks:
     - k3snet    
       

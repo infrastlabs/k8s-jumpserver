@@ -40,3 +40,4 @@ cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=ho
 - 设定Master节点主机名: `hostname: k3-server`
 - 设定k3snet网段: `3.4.5.0/24`, for jumpserver's static ip: `3.4.5.100`
 - 设定NodePort端口段: `–service-node-port-range=30000-30050` #1-65535 #默认范围（30000-32767)
+- docker.sock透传: `/var/run/docker.sock`
