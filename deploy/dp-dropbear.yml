@@ -5,8 +5,8 @@ metadata:
   namespace: default
   labels:
     app: dropbear
-  annotations:
-    fluxcd.io/ignore: true
+  # annotations:
+  #   fluxcd.io/ignore: true
 spec:
   replicas: 2
   selector:
