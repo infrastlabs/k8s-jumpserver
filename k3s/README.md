@@ -31,6 +31,8 @@ cat kubeconfig.yaml > .kube/config
 cd /opt/apps/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=host --entrypoint=bash registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
 ```
 
+- 通用集群插件: TODO
+
 ## docker-compose.yml改动
 
 - 改用aliyun镜像: `registry.cn-shenzhen.aliyuncs.com/infrastlabs/k3s:${K3S_VERSION:-latest}`
