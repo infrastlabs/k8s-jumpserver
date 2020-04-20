@@ -6,7 +6,7 @@
 - jumpserver: ~~1.初始全自动化；~~ ~~2.hostpush删增改；~~ 3.样式fix,文案；
 - 
 - k8s内置方案； dcp外置方案_固定ip172.26.0.100；
-- 设计图示、操作手册pic
+- ~~设计图示~~、操作手册pic
 - 
 - 改了image后dcp up, recreate: 重置dbSchema， noInitdata; addCron加两遍； cause err: loginErr, hostPushErr.
 
