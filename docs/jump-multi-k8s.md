@@ -11,7 +11,7 @@
 ## 快速体验（三步走）
 
 - 1.[初始k3s轻集群](../k3s/README.md)
-- 2.设定jumpregister地址`args: -jumpurl=http://3.4.5.100`, `kc apply ./deploy`
+- 2.设定jumpregister地址`args: -jumpurl=http://3.4.5.100`, `kc apply -f ./deploy`
 - 3.在一步基础上回到上一层目录，`dcp up -d`. 再访问跳板机web: 8888, ssh: 2222即可
 
 ```bash
@@ -21,7 +21,7 @@ set +C && cat kubeconfig.yaml > .kube/config
 # 启动一个临时kubecmd控制台
 img=registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
 cd /opt/k8-jump/k3s && docker run -it --rm -v $(pwd):/root --network=host --entrypoint=bash $img #注意这里挂载到/root了
-kc apply /root/deploy #进到kubecmd容器内执行
+kc apply -f /root/deploy #进到kubecmd容器内执行
 ```
 
 **简化说明**
