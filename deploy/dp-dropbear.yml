@@ -24,7 +24,7 @@ spec:
       - name: test
         image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak
         imagePullPolicy: Always      
-        command: ['sh', '-c']
+        # command: ['sh', '-c'] #use Dockerfile's entrypoint
         args:
         - tail -f /dev/null
         env:
