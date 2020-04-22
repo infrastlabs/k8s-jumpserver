@@ -54,14 +54,27 @@ kc -n kube-systen get po -w #跟进pod初始化进度
 
 ![](docs/b32-资产.jpg)
 
-## 五、TODO
+## 五、TODO/路线规划
 
 - ~~DockerfileBuild, ref: rbac-manager~~ Done.
 - ~~flags: SERVER_URL, SYNC_TIME, MATCH_LABEL, KUBECONFIG,~~ Done.
-- conn err noExit
+- ~~conn err noExit~~ just lets it got err exit. will be pulled up by k8s.
+- 重点: 支持非ssh的方法管理docker容器/k8s下的pod，参考`docker exec` `kubectl exec` `kubectl-debug`的实现
 
 
-## 附1:容器跳板机说明
+## 附1：K8S容器自注册说明
+
+**1.条目项**
+
+- 在K8S内跑jumpregister，定时扫描符合条件的pod，推送信息到跳板机注册
+- 通过给业务编排的yaml设定Label `regist-jumpserver/enabled: enabled` Env `SSHD_ENABLE=true`  两处信息，以支持跳板机自动注册
+- 基础容器的支持：当前跳板基于ssh来管理容器，容器镜像需要sshd的支持，建议用轻量的`dropbear` 详参考：`registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak`
+
+jumpregister推送返回日志如下图(里面有相对上一次的: exist/add/del详细记录)
+
+![](res/design/02-jumpregister.jpg)
+
+## 附2:容器跳板机说明
 
 基于官方`0.3.x`最后的一次commit`3533c010`做优化及适配K8S模式。原理：在K8S容器内启用轻量级的`dropbear`ssh-server；通过`jumpregister`定时推送最新POD清单到容器跳板机。Jumpserver可外置也可内置于集群内。`0.3.x`相比官方最新版本具有`小巧轻量` `专注便捷`同时又具备`核心功能`的特性，更适合仅通过web管理面板授权、SSH远程跳板连接的场景。
 
@@ -81,27 +94,3 @@ kc -n kube-systen get po -w #跟进pod初始化进度
 - nav菜单项优化布局
 - 切换skin处 改静态图标
 - 修改文案： K8S-Jumpserver | 容器跳板机系统； 2016-2020, devcn.fun容器版
-
-### 版本号
-
-- v0.3.x part(20140704-20160726)
-- v0.4.0 part(20160809-20170303)
-- 
-- v1.0.0  20170303-20180314
-- v1.3.3  20180725
-- v1.4.10 20190430
-- v1.5.6  20200203
-
-### v0.3.x 分支图
-
-![](docs/flow_v0.3.x.jpg)
-
-### UI对比
-
-- v030
-
-![](docs/v030_index.jpg)
-
-- v050
-
-![](docs/v050_5.png)
