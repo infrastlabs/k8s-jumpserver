@@ -24,9 +24,9 @@ web: jumpadmin jumpadmin 端口:8888
 ssh: jumpadmin jumpadmin 端口:2222
 ```
 
-[docs | 外置版Jumpserver](docs/jump-multi-k8s.md)
-[docs | 设计简介](docs/1.K8S_Jumpserver跳板机设计简介.md)
-[docs | 使用指南](docs/2.K8S_Jumpserver跳板机使用指南.md)
+- [docs | 外置版Jumpserver](docs/jump-multi-k8s.md)
+- [docs | 设计简介](docs/1.K8S_Jumpserver跳板机设计简介.md)
+- [docs | 使用指南](docs/2.K8S_Jumpserver跳板机使用指南.md)
 
 **1.一条指令快速初始** (现有集群，jumpserver内置版)
 
