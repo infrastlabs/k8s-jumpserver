@@ -72,7 +72,7 @@ kc -n kube-systen get po -w #跟进pod初始化进度
 
 jumpregister推送返回日志如下图(里面有相对上一次的: exist/add/del详细记录)
 
-![](res/design/02-jumpregister.jpg)
+![](docs/res/design/02-jumpregister.jpg)
 
 ## 附2:容器跳板机说明
 
