@@ -24,10 +24,14 @@ cd /opt/k8-jump/k3s && docker run -it --rm -v $(pwd):/root --network=host --entr
 kc apply -f /root/deploy #进到kubecmd容器内执行
 ```
 
-**简化说明**
+**附1.简化说明**
 
 为了简化操作jumpserver 及 k3s做了匹配关联：
 
 - k3s的docker-compose设定网段为`3.4.5.0/24`
 - jumpserver的复用k3s的网络，ip固定为`3.4.5.100`
 - jumpserver与k3s的节点在同一网络，并且在`docker-compose.yml`做了路由打通到k3s中pod的网络(如您也用外置模式，同理需要手工打通路由 jumpserver才能顺利连接到pod)
+
+**附2.集群内置kubecmd配套**
+
+集群内置一个个kubecmd控制台，可由容器跳板机进入。 在上面用kubectl进行集群编排层面的管理操作
