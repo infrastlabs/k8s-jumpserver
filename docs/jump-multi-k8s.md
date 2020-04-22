@@ -19,7 +19,8 @@ cd /opt/k8-jump/k3s && mkdir -p .kube
 set +C && cat kubeconfig.yaml > .kube/config
 
 # 启动一个临时kubecmd控制台
-cd /opt/apps/k3s && docker run -it --rm -v $(pwd):/root --network=host --entrypoint=bash registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd #注意这里挂载到/root了
+img=registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
+cd /opt/k8-jump/k3s && docker run -it --rm -v $(pwd):/root --network=host --entrypoint=bash $img #注意这里挂载到/root了
 kc apply /root/deploy #进到kubecmd容器内执行
 ```
 
