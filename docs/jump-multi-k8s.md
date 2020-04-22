@@ -8,7 +8,7 @@
 - docker-compose单机板容器管理： 正在支持中。(需要在镜像或是启动命令处做支持)
 - k8s集群内pod容器管理： 全自动化，K8S容器版跳板机，POD自注册
 
-## 快速体验（三步走）
+**快速体验**（三步走）
 
 - 1.[初始k3s轻集群](../k3s/README.md)
 - 2.设定jumpregister地址`args: -jumpurl=http://3.4.5.100`, `kc apply -f ./deploy`
