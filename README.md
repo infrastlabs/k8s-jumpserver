@@ -17,16 +17,25 @@ K8S容器版跳板机，POD自注册，还原传统体验 方便开发调试及�
 
 ## 三、快速开始
 
-**1.现有集群**
+**帐号信息**
+
+```text
+web: jumpadmin jumpadmin 端口:8888
+ssh: jumpadmin jumpadmin 端口:2222
+```
+
+[外置版Jumpserver](docs/jump-multi-k8s.md)
+
+**1.一条指令快速初始** (现有集群，jumpserver内置版)
 
 ```bash
-kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy
-kc -n kube-systen get po -A
+kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy #初始指令
+kc -n kube-systen get po -w #跟进pod初始化进度
 ```
 
 (注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`, `dcp`为`docker-compose`简写)
 
-**2.[初始k3s轻集群](k3s/README.md) 再执行上一步**
+**2.无集群快速体验：[初始k3s轻集群](k3s/README.md) > 执行上一步**
 
 **ref**
 
