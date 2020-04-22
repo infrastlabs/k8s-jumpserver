@@ -24,9 +24,9 @@ spec:
       - name: test
         image: registry.cn-shenzhen.aliyuncs.com/infrastlabs/alpine-ext:weak
         imagePullPolicy: Always      
-        # command: ['sh', '-c']
-        # args:
-        # - tail -f /dev/null
+        # command: ['sh', '-c'] #use Dockerfile's entrypoint
+        args:
+        - tail -f /dev/null
         env:
           - name: SSHD_ENABLE
             value: "true"
