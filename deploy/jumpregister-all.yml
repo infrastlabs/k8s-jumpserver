@@ -72,7 +72,8 @@ spec:
         # command:
         # - cp
         args:
-        - -jumpurl=http://3.4.5.100
+        # - -jumpurl=http://3.4.5.100
+        - -jumpurl=http://jumpserver-svc
         # - -jumptime=3
         # - -jumplabel=regist-jumpserver/enabled
 
