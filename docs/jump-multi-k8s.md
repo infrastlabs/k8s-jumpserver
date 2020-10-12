@@ -34,4 +34,4 @@ kc apply -f /root/deploy #进到kubecmd容器内执行
 
 **附2.集群内置kubecmd配套**
 
-集群内置一个个kubecmd控制台，可由容器跳板机进入。 在上面用kubectl进行集群编排层面的管理操作
+集群内置一个kubecmd控制台，可由容器跳板机进入。 在上面用kubectl进行集群编排层面的管理操作
