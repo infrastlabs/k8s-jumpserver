@@ -80,7 +80,7 @@ jumpregister推送返回日志如下图(里面有相对上一次的: exist/add/d
 
 **优化改动**
 
-- fix:下载用户时不删除，可重复下载
+- fix:下载用户时不删除key，可重复下载
 - fix:适配AlineLinux的/etc/shadow登录问题
 - fix:容器环境下的cron定时清理修复
 - 开启Jumpserver平台用户ssh密码登录
