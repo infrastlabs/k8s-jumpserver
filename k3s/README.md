@@ -34,7 +34,7 @@ dcp scale agent=2 #形成两个agent+ 1Master的三节点集群
 
 ```bash
 cd /opt/k8-jump/k3s && mkdir -p .kube
-set +C && cat kubeconfig.yaml > .kube/config
+set +C && cat .kube/kubeconfig.yaml > .kube/config
 # 启动一个临时kubecmd控制台
 img=registry.cn-shenzhen.aliyuncs.com/infrastlabs/kube-cmd
 cd /opt/k8-jump/k3s && docker run -it --rm -v $(pwd)/.kube:/root/.kube --network=host --entrypoint=bash $img
