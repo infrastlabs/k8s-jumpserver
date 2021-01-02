@@ -32,7 +32,7 @@ ssh: jumpadmin jumpadmin 端口:2222
 
 ```bash
 kc apply -k https://gitee.com/infrastlabs/k8s-jumpserver//deploy #初始指令
-kc -n kube-systen get po -w #跟进pod初始化进度
+kc -n kube-system get po -w #跟进pod初始化进度
 ```
 
 (注: `kc` 为 `kubectl`的简写: `ln -s /usr/local/bin/kubectl kc`, `dcp`为`docker-compose`简写)
