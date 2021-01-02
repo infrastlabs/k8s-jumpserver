@@ -16,7 +16,7 @@ cd /opt/k8-jump/k3s
 
 # 先手工拉取镜像
 export K3S_TOKEN="demo-k3s-for:JumpserverTest"
-export K3S_VERSION=v1.17.4-k3s1-amd64
+export K3S_VERSION=v1.20.0-k3s2-amd64 #v1.19.5-k3s2-amd64 #v1.17.4-k3s1-amd64
 # ns=rancher
 ns=registry.cn-shenzhen.aliyuncs.com/infrastlabs
 docker pull $ns/k3s:${K3S_VERSION:-latest} #pull官方image
